@@ -32,3 +32,9 @@ sudo openssl x509 -req -days 30 -in server.csr -signkey server.key -out server.c
 	SSLEngine on
    	SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
    	SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+
+方法三：
+openssl genrsa -des3 -passout pass:123456 -out ssl.pass.key 2048
+openssl rsa -passin pass:123456 -in ssl.pass.key -out ssl.key
+openssl req -new -key ssl.key -out ssl.csr
+openssl x509 -req -days 365 -in ssl.csr -signkey ssl.key -out ssl.crt

@@ -1,7 +1,8 @@
 1. ssl server config
 #<Directory "/var/www/html/esrgear.com-20210727/">   
- #     Options +Indexes FollowSymLinks   
+ #     Options +Indexes +FollowSymLinks   
   #    AllowOverride all   
+   Require all granted
 #</Directory> 
 <VirtualHost *:443>
         # The ServerName directive sets the request scheme, hostname and port that
@@ -48,4 +49,12 @@ SSLEngine on
         #Include conf-available/serve-cgi-bin.conf
 </VirtualHost>
 
-2. 
+2. install with source
+install apr apr-devel apr-util apr-util-devel pcre2 pcre2-devel nghttp2
+wget https://github.com/nghttp2/nghttp2/releases/download/v1.37.0/nghttp2-1.37.0.tar.gz
+./configure --prefix=/usr/local/apache --enable-so --enable-ssl --enable-http2 --enable-rewrite
+
+3. config with php
+LoadModule php_module modules/libphp.so
+AddType application/x-httpd-php .php
+
