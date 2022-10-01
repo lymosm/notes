@@ -5,6 +5,7 @@
 3. aliyun platform get ali_key ali_secret
 4. export Ali_Key="sdfsdfsdfljlbjkljlkjsdfoiwje"
 5. export Ali_Secret="jlsdflanljkljlfdsaklkjflsa"
+acme.sh --register-account -m lai@1918726170003456.onaliyun.com
 6. acme.sh --issue --dns dns_ali -d example.com -d *.example.com 
 7. nginx conf fill the fullchain.cer and example.com.key
 8. reload nginx

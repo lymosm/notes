@@ -80,5 +80,5 @@ find . -name "*.webp" -exec du -s {} \; | awk '{sum+=$1};END {print sum / 1024 /
     find -name '.js' | xargs perl -pi -e 's|被替换的字符串|替换后的字符串|g'
 
     或
-    sed -i "s/原字符串/新字符串/g" `grep 原字符串 -rl 所在目录`
+    sed -i "s/原字符串/新字符串/g" `grep "原字符串" -rl 所在目录`
     
