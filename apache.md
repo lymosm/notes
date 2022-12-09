@@ -58,3 +58,20 @@ wget https://github.com/nghttp2/nghttp2/releases/download/v1.37.0/nghttp2-1.37.0
 LoadModule php_module modules/libphp.so
 AddType application/x-httpd-php .php
 
+4. if condition request_uri
+    <If "! %{REQUEST_URI} =~ /\.(png|gif|js|jpe?g)$/i" >
+    <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteBase /
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]
+    </IfModule>
+    </If>
+
+5. .htaccess config php.ini
+    php_value upload_max_filesize 50M
+    php_value memory_limit 2048M
+    php_value post_max_size 50M
