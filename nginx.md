@@ -34,4 +34,9 @@ server {
         }
     }
 
-#4. 
+#4. 过滤静态文件
+if ( $request_filename !~* .*.(jpg|js|css|ttf|svg|woff2|woff|png|webp|gif)$ ) {
+    rewrite ^(.*)$ /index.php?$query_string;
+}
+
+#5. 
