@@ -34,4 +34,29 @@ server {
         }
     }
 
-#4. 
+#4. proxy
+    location / {
+        proxy_pass http://127.0.0.1:8080/;
+        proxy_set_header    Host               $host:$server_port;
+        proxy_set_header    Remote_Addr        $remote_addr;
+        proxy_set_header    X-Real-IP          $remote_addr;
+        proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto  $scheme;
+        proxy_set_header    X-Nginx-Proxy      true;
+        
+        # index页面设置
+        index index;
+    }
+
+#5. 配置jpg png静态不走php (可用于wordpress)
+    location / {
+        try_files $uri $uri/ @rewriteapp;
+        index   index.php index.html index.htm;
+    }
+    location @rewriteapp {
+        if ( $request_filename !~* \.(jpg|png)$ ) {
+            rewrite ^(.*)$ /index.php/$1 last;
+        }
+    }
+
+#6. 
