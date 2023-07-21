@@ -35,6 +35,7 @@ server {
     }
 
 #4. proxy
+
     location / {
         proxy_pass http://127.0.0.1:8080/;
         proxy_set_header    Host               $host:$server_port;
@@ -49,6 +50,7 @@ server {
     }
 
 #5. 配置jpg png静态不走php (可用于wordpress)
+
     location / {
         try_files $uri $uri/ @rewriteapp;
         index   index.php index.html index.htm;
