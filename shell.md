@@ -1,4 +1,4 @@
-#1. delete file 
+#1. delete file
 find . -name '*_test.go' -delete
 
 #2. delete file
@@ -60,7 +60,7 @@ cart
 company
 store
 )
- 
+
 # $1 如果存在，输出 $1 exists，$1 如果不存在，输出 $1 not exists
 if [ "$1" != null ];then
      if [[ "${array[@]}" =~ "${1}" ]]; then
@@ -81,4 +81,6 @@ find . -name "*.webp" -exec du -s {} \; | awk '{sum+=$1};END {print sum / 1024 /
 
     或
     sed -i "s/原字符串/新字符串/g" `grep "原字符串" -rl 所在目录`
-    
+
+#5 tar 压缩排除文件夹
+    tar -zcvf demo.tar.gz --exclude=demo/no-need demo

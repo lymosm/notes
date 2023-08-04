@@ -34,6 +34,14 @@ server {
         }
     }
 
+<<<<<<< HEAD
+#4. 过滤静态文件
+if ( $request_filename !~* .*.(jpg|js|css|ttf|svg|woff2|woff|png|webp|gif)$ ) {
+    rewrite ^(.*)$ /index.php?$query_string;
+}
+
+#5. 
+=======
 #4. proxy
 
     location / {
@@ -62,3 +70,4 @@ server {
     }
 
 #6. 
+>>>>>>> 177bb55806653db0ffc80046498368b763989b50
