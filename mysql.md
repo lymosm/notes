@@ -1,4 +1,4 @@
-#1. install with binary
+#1. install with binary in linux
 $> groupadd mysql
 $> useradd -r -g mysql -s /bin/false mysql
 $> cd /usr/local
@@ -34,7 +34,7 @@ sql_mode = STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
 #6. backup
 mysqldump -hhostname -uusername -pmypwd databasename > /path to backup/bakname.sql
 
-#7 import settings
+#7. import settings
 	set global max_allowed_packet = 2*1024*1024*10   or max_allowed_packet = 20M in my.cnf
 	set global net_read_timeout = 120;
 	set global net_write_timeout = 900;
@@ -42,7 +42,30 @@ mysqldump -hhostname -uusername -pmypwd databasename > /path to backup/bakname.s
 	如果表损坏：innodb_force_recovery = 1 或者 6
 	innodb_large_prefix=ON 使用索引超过767字节
 
+#8. install on windows of mysql version 8.1.0+
+	1. write a conf file: ./my.cnf :
+		[mysqld]
+		basedir=D:\web-server\mysql-8.1.0-winx64
+		datadir=D:\web-server\mysql-8.1.0-winx64\data-mysql
+		port=3307
+
+	2. init data
+		./bin/mysqld.exe --defaults-file={dir}/my.cnf --initialize
+		./bin/mysqld.exe --defaults-file={dir}/my.cnf --initialize-insecure
+
+	3. start server
+		./bin/mysqld.exe --defaults-file={dir}/my.cnf --console
+
+	4. change password for root first time:
+		ALTER USER 'root'@'localhost' IDENTIFIED BY 'root-password';
+
+	5. install as service 
+		./bin/mysqld.exe --install MySQL --defaults-file={dir}/my.cnf
+
+	6. remove service 
+		./bin/mysqld.exe --remove
 
 
+#9. 
 
 
