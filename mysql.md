@@ -66,6 +66,25 @@ mysqldump -hhostname -uusername -pmypwd databasename > /path to backup/bakname.s
 		./bin/mysqld.exe --remove
 
 
-#9. 
+#9. mysql表分区
+	#已有表创建分区
+	alter table wp_postmeta partition by key(meta_id) partitions 10;
+
+	#删除指定分区
+	alert table tb_user DROP PARTITION p1;
+
+	#删除所有分区
+	alter table tb_user REMOVE PARTITIONING;
+
+	#查看分区信息
+	show create table tb_user;
+	SHOW PARTITIONS;
+
+
+
+
+
+
+
 
 

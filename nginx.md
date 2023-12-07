@@ -1,5 +1,6 @@
 #1. install
-./configure --user=www --group=www --with_http_ssl_module --with_http_v2_module --with-http_stub_status_module
+./configure --user=www --group=www --with_http_ssl_module --with_http_v2_module --with-http_stub_status_module --add-module=../ngx_cache_purge-2.3（可选，可手动清除fastcgi_cache)
+    wget https://github.com/FRiCKLE/ngx_cache_purge/archive/refs/tags/2.3.tar.gz 下载后解压即可
 
 #2. rewrite try_files
 try_files $uri $uri/ /index.php?$args;
@@ -71,3 +72,52 @@ if ( $request_filename !~* .*.(jpg|js|css|ttf|svg|woff2|woff|png|webp|gif)$ ) {
 
 #6. 
 >>>>>>> 177bb55806653db0ffc80046498368b763989b50
+
+
+#7. wp配置fastcgi_cache 
+    http{
+        fastcgi_cache_path /tmp/wpcache levels=1:2 keys_zone=wpcache:128m inactive=7d max_size=1G;
+        fastcgi_temp_path /tmp/wpcache/temp;
+        fastcgi_cache_key "$scheme$request_method$host$request_uri";
+        fastcgi_cache_methods GET HEAD;
+        fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+        fastcgi_hide_header Pragma;
+
+
+        server{
+            set $skip_cache 0;
+            #post 访问不缓存
+            if ($request_method = POST) {
+                set $skip_cache 1;
+            }
+            #动态查询不缓存
+            if ($query_string != "") {
+                set $skip_cache 1;
+            }
+            #后台等特定页面不缓存（其他需求请自行添加即可）
+            if ($request_uri ~* "/wp-admin/|/xmlrpc.php|wp-.*.php|/feed/|index.php|sitemap(_index)?.xml") {
+                set $skip_cache 1;
+            }
+            #对登录用户、评论过的用户不展示缓存(注释掉就不区分登陆与否都缓存)
+            if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in") {
+               set $skip_cache 0;
+            }
+
+            location \.php{
+                fastcgi_cache_bypass $skip_cache;
+                fastcgi_no_cache $skip_cache;
+                fastcgi_cache wpcache;
+                add_header X-Cache "$upstream_cache_status From $host";
+                fastcgi_cache_valid 200 301 302 304 1d;
+            }
+
+            #缓存清理配置（可选模块，请细看下文说明）
+            location ~ /purge(/.*) {
+                allow 127.0.0.1;
+                allow "此处填写你服务器的真实外网 IP";
+                deny all;
+                fastcgi_cache_purge wpcache "$scheme$request_method$host$request_uri";
+            }
+        }
+    }
+    
