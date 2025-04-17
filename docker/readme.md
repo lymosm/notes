@@ -40,7 +40,7 @@ docker run -itd -p 80:80 -p 443:443 -p 3306:3306 -p 9000:9000 -v e:/www:/www -v 
 
 
 
-docker run -itd -p 80:80 -p 443:443 -p 3306:3306 -p 9000:9000 -v e:/www:/www -v e:/docker/lnmp/nginx/conf:/usr/local/nginx/conf --privileged=true --name=lnmp 2233466866/lnmp
+docker run -itd -p 80:80 -p 443:443 -p 3306:3306 -p 9000:9000 -v e:/www:/www -v e:/docker/lnmp/nginx/conf:/usr/local/nginx/conf -v e:/docker/lnmp/mysql:/data/mysql --privileged=true --name=lnmp 2233466866/lnmp
 
 docker run -dit --privileged --name=lnmp 2233466866/lnmp
 
