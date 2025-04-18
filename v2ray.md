@@ -55,7 +55,7 @@
 		  }]
 		}
 
-	4. exec /usr/local/bin/v2ray uuid get client id
+	4. exec /usr/local/bin/v2ctl uuid get client id
 
 	5. config nginx proxy
 
