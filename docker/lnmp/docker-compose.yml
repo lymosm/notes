@@ -46,8 +46,8 @@ services:
       MYSQL_PASSWORD: 123456
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/my.cnf
-      - ./mysql/mysqld.cnf:/etc/mysql/conf.d/my.cnf
+      # - ./mysql/my.cnf:/etc/my.cnf
+      # - ./mysql/mysqld.cnf:/etc/mysql/conf.d/my.cnf
     #  - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     # command: [
     #   "--skip-chown"  # 关键：禁止容器修改文件所有权

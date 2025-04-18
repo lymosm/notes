@@ -6,4 +6,7 @@ docker compose up
 
 3. down or remove:
 docker compose down
+docker compose stop
+
+
 

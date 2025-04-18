@@ -7,6 +7,16 @@ ENV MYSQL_DATABASE=test
 ENV MYSQL_USER=appuser
 ENV MYSQL_PASSWORD=123456
 
+# 安装vim（需要切换到root用户，安装后切回mysql用户）
+# RUN apt update && apt install -y vim && rm -rf /var/lib/apt/lists/*
+# RUN apk add --no-cache vim
+
+
+# 复制自定义MySQL配置文件
+# COPY mysqld.cnf /etc/mysql/conf.d/
+COPY --chown=mysql:mysql --chmod=0644 mysqld.cnf /etc/mysql/conf.d/
+
+
 # 复制初始化脚本（会自动执行）
 COPY init.sql /docker-entrypoint-initdb.d/
 
