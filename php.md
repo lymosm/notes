@@ -19,3 +19,17 @@ or
 	sudo mv composer.phar /usr/local/bin/composer  === linux
 	@php "%~dp0composer.phar" %*  === in composer.bat on php bin path of windows
 
+#4. yum 升级php
+	# yum list installed | grep php
+# yum remove php
+# yum remove php-*
+# yum remove php72*
+# yum list installed | grep php
+# yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm 
+# yum install -y php74-php-fpm php74-php-cli php74-php-bcmath php74-php-gd php74-php-json php74-php-mbstring php74-php-mcrypt php74-php-mysqlnd php74-php-opcache php74-php-pdo php74-php-pecl-crypto php74-php-pecl-mcrypt php74-php-pecl-geoip php74-php-recode php74-php-snmp php74-php-soap
+# ln -s /usr/bin/php74 /usr/bin/php
+# systemctl enable php74-php-fpm
+# systemctl start php74-php-fpm 
+
+#5. 
+
