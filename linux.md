@@ -23,4 +23,10 @@
     swapoff /usr/swap/swapfile
     rm -rf /usr/swap/swapfile
     
-    
+#3. 查看服务器型号
+    dmidecode -t1
+
+#4. 查看centos版本
+    cat /etc/redhat-release
+
+#5. 
