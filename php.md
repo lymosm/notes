@@ -6,6 +6,12 @@ or
 
 ./configure --prefix=/usr/local/php --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-openssl --with-zlib --with-curl --enable-ftp --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype --enable-intl --enable-mbstring --with-mysqli=/usr/local/mysql/bin/mysql_config --with-pdo-mysql=/usr/local/mysql --with-zip --with-apxs2=/usr/local/apache/bin/apxs
 
+
+or Mac php-8.2
+
+./configure --prefix=/Volumes/app/opt/lnmp/php --with-config-file-path=/Volumes/app/opt/lnmp/php/etc --with-iconv=/usr/local/opt/libiconv --with-freetype --with-jpeg --with-zlib --enable-xml --with-curl --enable-fpm --enable-mbstring --enable-gd --enable-bcmath --with-openssl-dir=/Volumes/app/opt/openssl --with-openssl --with-zip --with-zlib --enable-pdo --with-pdo-mysql=/Volumes/app/opt/lnmp/mysql --with-mysqli
+
+
 #2. composer usage
 	composer install 
 	composer update mypackage/mypackage

@@ -1,5 +1,5 @@
 #1. install
-./configure --user=www --group=www --with_http_ssl_module --with_http_v2_module --with-http_stub_status_module --add-module=../ngx_cache_purge-2.3（可选，可手动清除fastcgi_cache)
+./configure --user=www --group=www --with-http_ssl_module --with-http_v2_module --with-http_stub_status_module --add-module=../ngx_cache_purge-2.3（可选，可手动清除fastcgi_cache)
     wget https://github.com/FRiCKLE/ngx_cache_purge/archive/refs/tags/2.3.tar.gz 下载后解压即可
 
 #2. rewrite try_files
